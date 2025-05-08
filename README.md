@@ -1,6 +1,6 @@
-# fapx25-scripts
+# FAPx#25 Support Scripts
 
-A portable Bash script package for Termux, built for convenience and automation.
+Support scripts for the project **FAPx#25**, focused on data handling, manipulation, standardization, and automated report generation in a Termux environment.
 
 ## Features
 
