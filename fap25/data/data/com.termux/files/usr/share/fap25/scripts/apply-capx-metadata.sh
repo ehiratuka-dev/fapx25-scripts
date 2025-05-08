@@ -1,14 +1,15 @@
 #!/bin/bash
 
 ambiente="$1"
-folder="/storage/emulated/0/Pictures/FAPx#Current"
+source "$PREFIX/etc/fap25/config.conf"
 
+folder="$HOMOLOG_PATH"
 if [[ "$ambiente" == "PROD" ]]; then
-  folder="/storage/emulated/0/Pictures/FAPx#Current"
+  folder="$CAPX_PROD_PATH"
 fi
 
 # Inicia o script
-capx_csv="./scripts/capx.csv"
+capx_csv="$CAPX_CSV_FILE"
 declare -A capxTitulo
 declare -A capxAtriz
 

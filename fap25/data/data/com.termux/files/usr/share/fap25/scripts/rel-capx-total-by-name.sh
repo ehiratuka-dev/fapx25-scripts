@@ -1,10 +1,11 @@
 #!/bin/bash
 
 ambiente="$1"
-folder="/storage/emulated/0/Pictures/FAPx#Current"
+source "$PREFIX/etc/fap25/config.conf"
 
+folder="$HOMOLOG_PATH"
 if [[ "$ambiente" == "PROD" ]]; then
-  folder="/storage/emulated/0/Pictures/FAPx#Current"
+  folder="$FAPX_PROD_PATH"
 fi
 
 # Inicia o script
@@ -13,7 +14,7 @@ awk -F',' '{
     for (i = 1; i <= n; i++) count[names[i]]++
 } END {
     for (name in count) printf "%d\t%s\n", count[name], name
-}' scripts/capx.csv | sort -nr | awk -F'\t' '
+}' $CAPX_CSV_FILE | sort -nr | awk -F'\t' '
 BEGIN {
     printf "%-25s %5s\n", "Atriz", "Total"
     printf "%-25s %5s\n", "-------------------------", "-----"

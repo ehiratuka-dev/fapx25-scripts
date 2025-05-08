@@ -1,6 +1,14 @@
 #!/data/data/com.termux/files/usr/bin/bash
 ambiente="HOMOLOG"
 
+CONFIG_FILE="$PREFIX/etc/fap25/config.conf"
+if [ -f "$CONFIG_FILE" ]; then
+  source "$CONFIG_FILE"
+else
+  echo "Configuration file not found at $CONFIG_FILE"
+  exit 1
+fi
+
 aplicar_metadados() {
   bash $PREFIX/share/fap25/scripts/apply-metadata.sh "$ambiente"
 }

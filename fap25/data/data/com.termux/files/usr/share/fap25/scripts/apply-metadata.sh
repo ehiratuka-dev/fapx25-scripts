@@ -1,14 +1,15 @@
 #!/bin/bash
 
 ambiente="$1"
-folder="/storage/emulated/0/Pictures/FAPx#Current"
+source "$PREFIX/etc/fap25/config.conf"
 
+folder="$HOMOLOG_PATH"
 if [[ "$ambiente" == "PROD" ]]; then
-  folder="/storage/emulated/0/Pictures/FAPx#Current"
+  folder="$FAPX_PROD_PATH"
 fi
 
 # Inicia o script
-profiles_csv="./scripts/profiles.csv"
+profiles_csv="$PROFILE_CSV_FILE"
 
 # Lê o CSV e carrega perfis em um array associativo
 declare -A profileNames
