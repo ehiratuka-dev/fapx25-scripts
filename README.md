@@ -10,19 +10,30 @@ Support scripts for the project **FAPx#25**, focused on data handling, manipulat
 
 ## Requirements
 
-- [Termux](https://f-droid.org/packages/com.termux/)  
+- Termux packages:
+  - rclone
+  - ffmpeg
+  - exiftool
+
+- [Termux](https://f-droid.org/packages/com.termux/)
 - `dpkg-deb` utility (comes with Termux's `dpkg` package)
 
 ## Installation
 
-### 1. Clone the repository
+### Install required dependencies
+
+```bash
+pkg install rclone ffmpeg exiftool
+```
+
+### Clone the repository
 
 ```bash
 git clone https://github.com/ehiratuka-dev/fapx25-scripts.git
 cd fapx25-scripts
 ```
 
-### 2. Build the `.deb` package
+### Build the `.deb` package
 
 ```bash
 dpkg-deb --build fap25
@@ -30,13 +41,13 @@ dpkg-deb --build fap25
 
 This will generate a `fap25.deb` file in the current directory.
 
-### 3. Install the package
+### Install the package
 
 ```bash
 dpkg -i fap25.deb
 ```
 
-### 4. Run the main script
+### Run the main script
 
 ```bash
 fap25
