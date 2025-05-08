@@ -1,0 +1,7 @@
+Package: fap25
+Version: 1.0
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: White Sanderson <white@sanderson.com>
+Description: Conjunto de scripts do projeto The FAP 25

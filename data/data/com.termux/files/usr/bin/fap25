@@ -1,0 +1,109 @@
+#!/data/data/com.termux/files/usr/bin/bash
+ambiente="HOMOLOG"
+
+aplicar_metadados() {
+  bash $PREFIX/share/fap25/scripts/apply-metadata.sh "$ambiente"
+}
+
+executar_opcao() {
+  case $1 in
+    1)
+      bash $PREFIX/share/fap25/scripts/toogle-fap.sh
+      ;;
+    2)
+      bash $PREFIX/share/fap25/scripts/apply-metadata.sh "$ambiente"
+      ;;
+    3)
+      bash $PREFIX/share/fap25/scripts/apply-capx-metadata.sh "$ambiente"
+      ;;
+    4)
+      bash $PREFIX/share/fap25/scripts/gen-quadros.sh "$ambiente"
+      aplicar_metadados
+      ;;
+    5)
+      bash $PREFIX/share/fap25/scripts/gen-destaques.sh "$ambiente"
+      aplicar_metadados
+      ;;
+    6)
+      bash $PREFIX/share/fap25/scripts/gen-capas.sh "$ambiente"
+      aplicar_metadados
+      ;;
+    7)
+      while true; do
+        clear
+        echo "=========== MENU RELATÓRIOS ==========="
+        echo "1) CAPx: Total por Atriz"
+        echo "2) CAPx: Listar Arquivos e Atribitos"
+        echo "9) Voltar"
+        echo "======================================="
+        read -p "Escolha uma opção: " subopcao
+
+        case $subopcao in
+          1)
+            clear
+            bash $PREFIX/share/fap25/scripts/rel-capx-total-by-name.sh "$ambiente"
+            ;;
+          2)
+            clear
+            bash $PREFIX/share/fap25/scripts/rel-capx-list.sh "$ambiente"
+            ;;
+          9)
+            break
+            ;;
+          *)
+            echo "Opção inválida!"
+            ;;
+        esac
+
+        echo
+        read -p "Pressione Enter para continuar..."
+      done
+      ;;
+    9)
+      echo "Saindo..."
+      exit 0
+      ;;
+    H|h)
+      ambiente="HOMOLOG";
+      echo "Ambiente alterado para HOMOLOGAÇÃO"
+      ;;
+    P|p)
+      ambiente="PROD";
+      echo "Ambiente alterado para PRODUÇÃO"
+      ;;
+    *)
+      echo "Opção inválida!"
+      ;;
+  esac
+}
+
+# Se um argumento for passado, executa e sai
+if [[ -n $1 ]]; then
+  executar_opcao "$1"
+  exit 0
+fi
+
+while true; do
+  ambienteTxt="Ambiente: Homologação (Pressione P para \"Produção\""
+  if [[ "$ambiente" == "PROD" ]]; then
+    ambienteTxt="Ambiente: Produção (Pressione H para \"Homologação\""
+  fi
+
+  clear
+  echo "=============== MENU DE AÇÕES ==============="
+  echo "$ambienteTxt"
+  echo ""
+  echo "1) Habilitar/Desabilitar FAPx#25"
+  echo "2) Aplicar Metadados em Arquivos|FAPx|RECx|R25x"
+  echo "3) Aplicar Metadados em CAPx"
+  echo "4) Gerar Quadros"
+  echo "5) Gerar Destaques"
+  echo "6) Gerar Capas"
+  echo "7) Relatórios"
+  echo "9) Sair"
+  echo "=========================="
+  read -p "Escolha uma opção: " opcao
+
+  executar_opcao "$opcao"
+  read -p "Pressione Enter para continuar..."
+done
